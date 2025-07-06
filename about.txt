@@ -1,0 +1,58 @@
+MOKSH SHAH
+linkedin.com/in/mshah-17 | shahmoksh996@gmail.com | (916)598-6993 | www.shahmoksh.me | github.com/shmoksh
+
+TECHNICAL SKILLS
+Programming Languages: Python, Java, Go, TypeScript, React, GraphQL, Rust, Kotlin, Node.js
+Frameworks | Databases: Django, Flask, Next.js, Tailwind CSS, PostgreSQL, MongoDB, Redis, EntQL
+Related Skills: Git, Docker, Kubernetes, Jenkins, Azure, AWS (EC2, S3, Lambda, ElasticSearch), gRPC, REST API, Linux, GenAI
+Relevant Coursework: Advanced Algorithms, Data Structures, Distributed Databases, Machine Learning, Intro to AI
+
+WORK EXPERIENCE
+Meta California, United States
+Software Engineer June 2022 – Present
+● Developed 0→1 scalable platform, automating workflows and saving 3000+ hr/yr by unifying cross-functional processes.
+● Boosted decision speed by 40% with an Agentic AI for self-serve analytics, converting natural language to data visualizations.
+● Led org-wide query optimization, cutting fatal errors and improved API latency by 8s to 200ms enhanced reliability at scale.
+● Co-built a custom ETL framework (Airflow-like) to sync cross-platform data, powering 220+ pipelines with 99.9% uptime.
+● Implemented automatic SEV detection, enhancing product reliability and reducing downtime proactive issue resolution.
+
+Intel Corporation California, United States
+Software Engineer Intern February 2021 – Dec 2021
+● Devised a multi-processing application to execute software testing using APIs to improve execution time by approx. 40%.
+● Coordinated with a team to restructure failure management logging systems to identify failures and create cluster groups.
+● Worked with XFN teams to provide an automation framework to help testing scripts and capture system failure.
+● Improved and automated CI/CD pipeline to perform regression testing and deploy packages, productivity increased by 35%.
+
+Turabit Solution Pvt. Ltd. Ahmedabad, India
+Software Engineer July 2018 – April 2019
+● Built a conversational AI chatbot that automates IT services that reduce 80% of mundane tasks supported at various platforms.
+● Improved integration efficiency by 40% supporting secure REST APIs for end-to-end cross-platform implementation.
+● Integrated "pay as you go" service using stripe payment gateway in a web app that creates customizable chatbots in 5 mins.
+● Discussed with teams to redesign database architecture including backup/recovery, data storage and security.
+
+ConceptServe Technologies Ahmedabad, India
+Software Engineer Intern January 2018 – July 2018
+● Built a scalable MVC-based social media app with CRUD for posts, comments, and groups to accelerate feature delivery.
+● Integrated OTP-based 2FA with email verification to enhance account security and prevent unauthorized access.
+
+PROJECTS
+Stock Market WebApp February 2021 – April 2021
+● Developed RESTful APIs with 8,000+ companies' stock data, restructured and stored in Amazon DynamoDB for low latency.
+● Enabled secure, authorized access by implementing API key authentication and query rate limiting per user per API.
+● Built a web app to run multiple API calls and visualize stock performance with real-time interactive candlestick charts.
+
+Network Intrusion Detection October 2020 – November 2020
+● Implemented predictive binary classification models(LR, KNN, SVM, NN) to distinguish between good and bad connections.
+● Applied one-hot encoding on categorical features to balance out the train and test dataset to eliminate inconsistent values.
+● Illustrated correlation analysis chart to remove highly correlated features to avoid overfitting the model by limiting value to 0.9.
+
+House Price Estimation September 2020– October 2020
+● Built an end-to-end predictive model that forecasted housing prices, enabling data-driven decisions for property valuation.
+● Achieved 92% R² score by applying feature scaling, one-hot encoding, and cross-validation for robust model performance.
+
+EDUCATION
+California State University - Sacramento, MS Computer Science January 2020 – May 2022
+Gujarat Technical University, India, BS Computer Engineering August 2014 – July 2018
+
+CERTIFICATION
+JPMorgan Virtual Experience Program Participant successfully completed all 3 tasks. July 2020 
