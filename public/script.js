@@ -185,12 +185,12 @@ async function processQuestion(question, buttonType = null) {
 
 // Send message to AI via backend (only for custom questions)
 async function sendMessageToAI(message) {
-    const response = await fetch('/ask', {
+    const response = await fetch('/.netlify/functions/api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ message: message })
     });
     
     if (!response.ok) {
@@ -1017,7 +1017,7 @@ async function sendToAI(query) {
     showTypingIndicator();
     
     try {
-        const response = await fetch('/api/chat', {
+        const response = await fetch('/.netlify/functions/api', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

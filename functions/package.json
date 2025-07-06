@@ -1,0 +1,10 @@
+{
+  "name": "ai-portfolio-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for AI portfolio website",
+  "main": "api.js",
+  "dependencies": {
+    "openai": "^4.0.0",
+    "dotenv": "^16.0.0"
+  }
+} 
