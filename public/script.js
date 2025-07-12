@@ -95,19 +95,24 @@ class PortfolioApp {
         
         try {
             let response;
+            let context = 'default';
             
             // Check if we should use predefined response
             if (predefinedSection) {
                 response = this.apiService.getPredefinedResponse(predefinedSection);
+                context = predefinedSection; // Use the section type as context
             } else {
                 const predefinedAction = this.apiService.shouldUsePredefinedResponse(query);
                 if (predefinedAction) {
                     response = this.apiService.getPredefinedResponse(predefinedAction);
+                    context = predefinedAction; // Use the detected action as context
                 } else {
                     // Use AI for complex queries
                     const result = await this.apiService.askQuestion(query);
                     if (result.success) {
                         response = result.data;
+                        // Detect context from query for AI responses
+                        context = this.uiManager.responseRenderer.detectContext(query);
                     } else {
                         throw new Error(result.error);
                     }
@@ -117,8 +122,8 @@ class PortfolioApp {
             // Add AI response to chat
             this.addChatMessage('assistant', response);
             
-            // Show response with typing effect and query context
-            await this.uiManager.showResponse(response, query);
+            // Show response with typing effect and proper context for dynamic layout
+            await this.uiManager.showResponse(response, query, context);
             
             // Smooth scroll to response
             this.smoothScrollToResponse();

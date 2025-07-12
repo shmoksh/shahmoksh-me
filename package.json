@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "build": "echo 'Build completed'"
+    "build": "echo 'Build completed'",
+    "test": "node test-api.js"
   },
   "keywords": [
     "portfolio",
@@ -20,7 +21,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.18.2",
-    "openai": "^4.20.1"
+    "openai": "^4.20.1",
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

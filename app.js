@@ -62,13 +62,13 @@ CONTACT: shahmoksh996@gmail.com, LinkedIn: mshah-17, GitHub: shmoksh, Phone: (91
 
 Instructions: Be helpful, concise, and professional. Provide specific, accurate information based on the data above. If asked about something not covered, politely redirect to relevant information that is available.`;
 
-// API route for AI chat
-app.post('/ask', async (req, res) => {
+// API route for AI chat (both /ask and /api/ask for compatibility)
+const handleAIRequest = async (req, res) => {
   try {
-    const { message } = req.body;
+    const { question } = req.body;
 
-    if (!message || typeof message !== 'string') {
-      return res.status(400).json({ error: 'Valid message is required' });
+    if (!question || typeof question !== 'string') {
+      return res.status(400).json({ error: 'Valid question is required' });
     }
 
     // Check if OpenAI API key is configured
@@ -83,7 +83,7 @@ app.post('/ask', async (req, res) => {
       model: 'gpt-3.5-turbo',
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: message }
+        { role: 'user', content: question }
       ],
       max_tokens: 800,
       temperature: 0.7,
@@ -117,7 +117,11 @@ app.post('/ask', async (req, res) => {
       details: error.message 
     });
   }
-});
+};
+
+// Register both routes for compatibility
+app.post('/ask', handleAIRequest);
+app.post('/api/ask', handleAIRequest);
 
 // Serve the main page
 app.get('/', (req, res) => {

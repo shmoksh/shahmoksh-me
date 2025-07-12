@@ -124,17 +124,17 @@ export class UIManager {
     }
 
     // Show response with dynamic layout
-    async showResponse(response, query = '') {
+    async showResponse(response, query = '', context = null) {
         this.responseSection.style.display = 'block';
         this.responseContainer.innerHTML = '<div class="response-content"></div>';
         
         // Update search button
         this.updateSearchButton('responding');
         
-        // Detect context from query
-        const context = this.responseRenderer.detectContext(query);
+        // Use provided context or detect from query
+        const detectedContext = context || this.responseRenderer.detectContext(query);
         
-        await this.typeResponse(response, this.responseContainer.querySelector('.response-content'), context);
+        await this.typeResponse(response, this.responseContainer.querySelector('.response-content'), detectedContext);
         
         // Reset search button
         this.updateSearchButton('default');
