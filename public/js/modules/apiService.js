@@ -2,6 +2,52 @@
 export class APIService {
     constructor() {
         this.baseURL = '/api';
+        // Define Moksh-related keywords and topics
+        this.mokshTopics = {
+            personal: ['moksh', 'shah', 'myself', 'me', 'about', 'who', 'background', 'bio'],
+            companies: ['meta', 'facebook', 'intel', 'conceptserve', 'turabit'],
+            roles: ['software engineer', 'intern', 'developer', 'engineer'],
+            education: ['california state university', 'sacramento', 'gujarat technical university', 'ms computer science', 'bs computer engineering', 'education', 'degree'],
+            skills: ['python', 'java', 'javascript', 'react', 'go', 'rust', 'typescript', 'kotlin', 'django', 'flask', 'aws', 'docker', 'kubernetes', 'machine learning', 'ai', 'ml', 'api', 'rest', 'graphql'],
+            projects: ['stock market', 'webapp', 'intrusion detection', 'house price', 'estimation', 'url shorty', 'esignature', 'calpers', 'project'],
+            achievements: ['3000', '40%', '200ms', '8s', 'automation', 'ai', 'performance', 'optimization', 'pipeline', 'uptime'],
+            contact: ['email', 'phone', 'linkedin', 'github', 'contact', 'reach', 'connect'],
+            experience: ['experience', 'job', 'work', 'career', 'employment', 'meta', 'intel', 'company', 'role', 'position']
+        };
+    }
+
+    // Check if query is related to Moksh's content
+    isMokshRelated(query) {
+        const lowerQuery = query.toLowerCase();
+        
+        // Check if query contains any Moksh-related keywords
+        for (const category in this.mokshTopics) {
+            for (const keyword of this.mokshTopics[category]) {
+                if (lowerQuery.includes(keyword)) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    // Get fallback reply for unrelated queries
+    getFallbackReply() {
+        return `I can only answer questions about my background, experience, and expertise. 
+
+Here are some topics you can ask me about:
+• My work at Meta and previous companies
+• My technical skills and projects
+• My education and background
+• My achievements and impact
+• How to contact me
+
+Try asking something like:
+- "Tell me about your work at Meta"
+- "What projects have you built?"
+- "What are your technical skills?"
+- "How can I contact you?"`;
     }
 
     // Check if query should use predefined response

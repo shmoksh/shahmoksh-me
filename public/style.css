@@ -237,6 +237,15 @@ body::before {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  outline: none !important;
+}
+
+.search-form:focus {
+  outline: none !important;
+}
+
+.search-form:focus-visible {
+  outline: none !important;
 }
 
 .input-group {
@@ -248,30 +257,37 @@ body::before {
   padding: 0.5rem;
   transition: var(--transition);
   box-shadow: var(--shadow-lg);
+  outline: none !important;
 }
 
-.input-group:focus-within {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-xl);
+.input-group:focus {
+  outline: none !important;
+}
+
+.input-group:focus-visible {
+  outline: none !important;
 }
 
 #search-input {
   width: 100%;
   background: transparent;
   border: none;
-  outline: none;
+  outline: none !important;
   color: var(--text-primary);
   font-size: 1rem;
   font-family: inherit;
 }
 
 #search-input:focus {
-  outline: none;
-  box-shadow: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-#search-input::placeholder {
-  color: var(--text-muted);
+#search-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 #search-btn {
@@ -288,11 +304,21 @@ body::before {
   transition: var(--transition);
   box-shadow: var(--shadow-md);
   flex-shrink: 0;
+  outline: none !important;
 }
 
-#search-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+#search-btn:focus {
+  outline: none !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+#search-btn:focus-visible {
+  outline: none !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+#search-input::placeholder {
+  color: var(--text-muted);
 }
 
 /* Removed animated hint - now using rotating placeholders */
@@ -504,12 +530,15 @@ body::before {
 }
 
 .tech-badge {
-  background: var(--gradient-4);
-  color: white;
-  padding: 0.2rem 0.6rem; /* Reduced from 0.25rem 0.75rem */
+  background: #2d3748;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
-  font-size: 0.75rem; /* Reduced from 0.8rem */
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #4a5568;
 }
 
 /* Experience Layout */
@@ -596,12 +625,15 @@ body::before {
 }
 
 .experience-role {
-  background: var(--gradient-6);
-  color: white;
-  padding: 0.2rem 0.6rem; /* Reduced from 0.25rem 0.75rem */
+  background: #2d3748;
+  color: #ffffff;
+  padding: 0.3rem 0.8rem;
   border-radius: var(--radius-md);
-  font-size: 0.75rem; /* Reduced from 0.8rem */
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #4a5568;
 }
 
 .experience-duration {
@@ -686,12 +718,15 @@ body::before {
 }
 
 .skill-badge {
-  background: var(--gradient-8);
-  color: white;
-  padding: 0.4rem 0.8rem; /* Reduced from 0.5rem 1rem */
+  background: #2d3748;
+  color: #ffffff;
+  padding: 0.3rem 0.8rem;
   border-radius: var(--radius-md);
-  font-size: 0.8rem; /* Reduced from 0.85rem */
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #4a5568;
   transition: var(--transition);
 }
 
@@ -756,8 +791,8 @@ body::before {
 }
 
 .contact-link:hover {
-  background: var(--gradient-10);
-  color: white;
+  background: var(--surface-light);
+  color: var(--text-primary);
 }
 
 .contact-icon {
@@ -790,10 +825,10 @@ body::before {
 }
 
 .chat-message {
-  padding: 0.75rem; /* Reduced from 1rem */
-  background: var(--surface-light);
-  border-radius: var(--radius-lg);
-  border-left: 4px solid var(--primary);
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border-left: none;
 }
 
 /* Loading Animation */
@@ -1027,8 +1062,8 @@ body::before {
 .contact-item:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  background: var(--gradient-1);
-  color: white;
+  background: var(--surface-light);
+  color: var(--text-primary);
 }
 
 .contact-item .material-icons {

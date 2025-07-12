@@ -19,8 +19,8 @@ class PortfolioApp {
         // Add event listeners
         this.addEventListeners();
         
-        // Set initial state
-        this.uiManager.updateActiveButton(document.querySelector('.me-btn'));
+        // Don't set any button as active initially
+        // this.uiManager.updateActiveButton(document.querySelector('.me-btn'));
     }
 
     addEventListeners() {
@@ -107,14 +107,21 @@ class PortfolioApp {
                     response = this.apiService.getPredefinedResponse(predefinedAction);
                     context = predefinedAction; // Use the detected action as context
                 } else {
-                    // Use AI for complex queries
-                    const result = await this.apiService.askQuestion(query);
-                    if (result.success) {
-                        response = result.data;
-                        // Detect context from query for AI responses
-                        context = this.uiManager.responseRenderer.detectContext(query);
+                    // Check if query is related to Moksh's content
+                    if (this.apiService.isMokshRelated(query)) {
+                        // Use AI for complex queries related to Moksh
+                        const result = await this.apiService.askQuestion(query);
+                        if (result.success) {
+                            response = result.data;
+                            // Use default context for AI responses to avoid card layouts
+                            context = 'default';
+                        } else {
+                            throw new Error(result.error);
+                        }
                     } else {
-                        throw new Error(result.error);
+                        // Show fallback reply for unrelated queries
+                        response = this.apiService.getFallbackReply();
+                        context = 'default';
                     }
                 }
             }

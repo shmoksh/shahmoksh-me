@@ -4,7 +4,7 @@ import { ResponseRenderer } from './responseRenderer.js';
 export class UIManager {
     constructor() {
         this.currentState = 'initial';
-        this.typingSpeed = 12; // Slightly slower typing (was 8)
+        this.typingSpeed = 8; // Faster typing (was 12)
         this.isTyping = false;
         this.responseRenderer = new ResponseRenderer();
     }
@@ -34,12 +34,16 @@ export class UIManager {
     // Update placeholder with rotating hints
     updatePlaceholder() {
         const hints = [
-            "Ask me about my experience at Meta...",
-            "Tell me about my projects...",
+            "Ask me about my work at Meta...",
+            "Tell me about my experience at Intel...",
+            "What projects did I build?",
+            "How did I improve API performance?",
             "What are my technical skills?",
+            "Tell me about my education background...",
             "How can I contact you?",
-            "What did I do at Intel?",
-            "Tell me about my education..."
+            "What did I do at ConceptServe Technologies?",
+            "Tell me about my AI/ML expertise...",
+            "What are my achievements at Meta?"
         ];
         
         let currentHint = 0;
@@ -96,10 +100,10 @@ export class UIManager {
             element.style.transform = 'translateY(10px)';
             
             setTimeout(() => {
-                element.style.transition = 'opacity 0.4s ease, transform 0.4s ease'; // Slightly slower animation
+                element.style.transition = 'opacity 0.3s ease, transform 0.3s ease'; // Faster animation
                 element.style.opacity = '1';
                 element.style.transform = 'translateY(0)';
-            }, index * 60); // Slightly slower stagger (was 50)
+            }, index * 30); // Faster stagger (was 60)
         });
         
         this.isTyping = false;
@@ -125,7 +129,9 @@ export class UIManager {
 
     // Show response with dynamic layout
     async showResponse(response, query = '', context = null) {
+        // Always clear the response container before rendering new content
         this.responseSection.style.display = 'block';
+        this.responseContainer.innerHTML = '';
         this.responseContainer.innerHTML = '<div class="response-content"></div>';
         
         // Update search button

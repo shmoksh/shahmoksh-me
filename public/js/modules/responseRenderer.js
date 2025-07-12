@@ -161,6 +161,18 @@ export class ResponseRenderer {
                 description: "End-to-end ML pipeline achieving 92% R² score using feature scaling, encoding, and cross-validation.",
                 tech: ["Regression", "Python", "Data Science", "Cross-validation", "Feature Engineering"],
                 icon: "🏠"
+            },
+            {
+                title: "eSignature Management Application, CalPERS (Project Sponsor)",
+                description: "Implemented background noise removal and canny edge detection algorithms for signature detection. Created signature drawing feature with crop/save functionality up to 300pi*300pi. Built user page for default signature selection.",
+                tech: ["Python", "OpenCV", "Image Processing", "JavaScript", "UX/UI"],
+                icon: "✍️"
+            },
+            {
+                title: "URL Shorty",
+                description: "Designed web-based URL shortener deployed on AWS EC2. Implemented customizable link editing and user-defined expiration periods.",
+                tech: ["AWS EC2", "Node.js", "Express.js", "MongoDB", "JavaScript", "Web Security"],
+                icon: "🔗"
             }
         ];
 
@@ -201,6 +213,13 @@ export class ResponseRenderer {
                 duration: "2018-2019",
                 description: "Built AI chatbot reducing 80% of IT tasks. Improved integration efficiency by 40% with secure REST APIs and Stripe integration.",
                 icon: "🤖"
+            },
+            {
+                company: "ConceptServe Technologies",
+                role: "Software Engineer – Intern",
+                duration: "Jan 2018 – Jul 2018",
+                description: "Implemented MVC architecture for social media web app with CRUD operations. Developed 2FA using OTP and email for enhanced security. Added 20% more test cases and improved debugging.",
+                icon: "💬"
             }
         ];
 
