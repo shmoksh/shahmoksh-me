@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moksh Shah - Software Engineer</title>
+    <meta name="description" content="Moksh Shah - Software Engineer at Meta specializing in scalable platforms, AI/ML, and performance optimization">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -13,34 +15,41 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1 class="name">MOKSH SHAH</h1>
-            <h2>Software Engineer, Applied AI & GenAI Engineer</h2>
+            <h1 class="name">Moksh Shah</h1>
+            <h2>Software Engineer at Meta</h2>
         </header>
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Action Buttons -->
+            <!-- Response Section -->
+            <section id="response-section" class="response-section" style="display: none;">
+                <div id="response-container" class="response-container">
+                    <!-- Response content will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Action Buttons Section -->
             <section class="action-buttons-section">
                 <div class="action-buttons">
-                    <button class="action-btn me-btn">
+                    <button class="action-btn me-btn active">
                         <span class="material-icons">person</span>
-                        <span>Me</span>
+                        Me
                     </button>
                     <button class="action-btn projects-btn">
                         <span class="material-icons">code</span>
-                        <span>Projects</span>
-                    </button>
-                    <button class="action-btn skills-btn">
-                        <span class="material-icons">psychology</span>
-                        <span>Skills</span>
+                        Projects
                     </button>
                     <button class="action-btn experience-btn">
                         <span class="material-icons">work</span>
-                        <span>Experience</span>
+                        Experience
+                    </button>
+                    <button class="action-btn skills-btn">
+                        <span class="material-icons">psychology</span>
+                        Skills
                     </button>
                     <button class="action-btn contact-btn">
-                        <span class="material-icons">mail</span>
-                        <span>Contact</span>
+                        <span class="material-icons">contact_mail</span>
+                        Contact
                     </button>
                 </div>
             </section>
@@ -48,39 +57,55 @@
             <!-- Search Section -->
             <section class="search-section">
                 <div class="search-container">
-                    <form class="search-form" id="search-form">
+                    <form id="search-form" class="search-form">
                         <div class="input-group">
-                            <input type="text" id="search-input" placeholder="Ask me anything about Moksh..." required>
-                            <button type="submit" id="search-btn">
-                                <span class="material-icons">search</span>
-                            </button>
+                            <input type="text" id="search-input" placeholder="Ask me about my experience, projects, or skills..." autocomplete="off">
                         </div>
+                        <button type="submit" id="search-btn">
+                            <span class="material-icons">search</span>
+                        </button>
                     </form>
-                </div>
-            </section>
-
-            <!-- Response Section -->
-            <section class="response-section" id="response-section" style="display: none;">
-                <div class="response-container" id="response-container">
-                    <!-- Dynamic content will be inserted here -->
                 </div>
             </section>
         </main>
     </div>
 
+    <!-- Modal for detailed card information -->
+    <div id="card-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="modal-close" id="modal-close">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Social Links -->
     <div class="social-links">
-        <a href="https://github.com/shmoksh" class="social-link" target="_blank">
-            <span class="material-icons">code</span>
+        <a href="https://github.com/shmoksh" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+            <span class="material-icons" aria-hidden="true">code</span>
         </a>
-        <a href="https://linkedin.com/in/mshah-17" class="social-link" target="_blank">
-            <span class="material-icons">link</span>
+        <a href="https://linkedin.com/in/mshah-17" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+            <span class="material-icons" aria-hidden="true">link</span>
         </a>
-        <a href="mailto:shahmoksh996@gmail.com" class="social-link">
-            <span class="material-icons">mail</span>
+        <a href="mailto:shahmoksh996@gmail.com" class="social-link" aria-label="Email">
+            <span class="material-icons" aria-hidden="true">mail</span>
         </a>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Fallback script for browsers without ES6 module support -->
+    <script>
+        if (!window.fetch) {
+            document.body.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">This application requires a modern browser with ES6 module support.</div>';
+        }
+    </script>
+    
+    <script type="module" src="script.js"></script>
+    <script nomodule src="script-fallback.js"></script>
 </body>
 </html> 
