@@ -3,206 +3,123 @@ import { ResponseRenderer } from './responseRenderer.js';
 
 export class UIManager {
     constructor() {
-        this.currentState = 'initial';
-        this.typingSpeed = 8; // Faster typing (was 12)
-        this.isTyping = false;
         this.responseRenderer = new ResponseRenderer();
+        this.typingMessage = null;
     }
 
-    // Initialize UI elements
     init() {
-        this.searchInput = document.getElementById('search-input');
-        this.searchForm = document.getElementById('search-form');
-        this.responseSection = document.getElementById('response-section');
-        this.responseContainer = document.getElementById('response-container');
-        this.actionButtons = document.querySelectorAll('.action-btn');
-        this.mainContent = document.querySelector('.main-content');
-        this.header = document.querySelector('.header');
-        this.actionButtonsSection = document.querySelector('.action-buttons-section');
-        this.searchSection = document.querySelector('.search-section');
-        this.searchBtn = document.getElementById('search-btn');
-        
-        // Update placeholder text with rotating hints
-        this.updatePlaceholder();
-        
-        // Focus search input for better UX
-        setTimeout(() => {
-            this.searchInput.focus();
-        }, 500);
+        this.chatStream = document.getElementById('chat-stream');
+        this.chatForm = document.getElementById('chat-form');
+        this.chatInput = document.getElementById('chat-input');
+        this.sendBtn = document.getElementById('send-btn');
+        this.promptButtons = Array.from(document.querySelectorAll('[data-prompt]'));
+        this.statusPill = document.getElementById('chat-status');
+
+        this.setupAutoResize();
     }
 
-    // Update placeholder with rotating hints
-    updatePlaceholder() {
-        const hints = [
-            "Ask me about my work at Meta...",
-            "Tell me about my experience at Intel...",
-            "What projects did I build?",
-            "How did I improve API performance?",
-            "What are my technical skills?",
-            "Tell me about my education background...",
-            "How can I contact you?",
-            "What did I do at ConceptServe Technologies?",
-            "Tell me about my AI/ML expertise...",
-            "What are my achievements at Meta?"
-        ];
-        
-        let currentHint = 0;
-        
-        const updatePlaceholderText = () => {
-            this.searchInput.placeholder = hints[currentHint];
-            currentHint = (currentHint + 1) % hints.length;
+    setupAutoResize() {
+        const resize = () => {
+            this.chatInput.style.height = 'auto';
+            const height = Math.min(this.chatInput.scrollHeight, 120);
+            this.chatInput.style.height = `${height}px`;
         };
-        
-        // Update every 3 seconds
-        setInterval(updatePlaceholderText, 3000);
+
+        this.chatInput.addEventListener('input', resize);
+        resize();
     }
 
-    // Update chat history display
-    updateChatHistory(chatHistory) {
-        // This will be used for multi-turn conversations
-        // For now, we'll just show the latest response
-        if (chatHistory.length > 0) {
-            const lastMessage = chatHistory[chatHistory.length - 1];
-            if (lastMessage.role === 'assistant') {
-                // The response will be shown by showResponse method
-            }
+    setStatus(text, isBusy = false) {
+        if (!this.statusPill) return;
+        this.statusPill.textContent = text;
+        this.statusPill.classList.toggle('is-busy', isBusy);
+    }
+
+    setSendingState(isSending) {
+        if (!this.sendBtn) return;
+        this.sendBtn.disabled = isSending;
+    }
+
+    addMessage(role, content) {
+        const message = document.createElement('div');
+        message.className = `chat-message is-${role}`;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-avatar';
+        avatar.textContent = role === 'assistant' ? 'AI' : 'YOU';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.innerHTML = this.responseRenderer.format(content);
+
+        const meta = document.createElement('div');
+        meta.className = 'chat-meta';
+        meta.textContent = role === 'assistant' ? 'Assistant' : 'You';
+        bubble.appendChild(meta);
+
+        if (role === 'user') {
+            message.appendChild(bubble);
+            message.appendChild(avatar);
+        } else {
+            message.appendChild(avatar);
+            message.appendChild(bubble);
         }
+
+        this.chatStream.appendChild(message);
+        this.scrollToBottom();
     }
 
-    // Set search input value with typing effect
-    async setSearchInputWithTyping(text) {
-        this.searchInput.value = '';
-        this.isTyping = true;
-        
-        for (let i = 0; i < text.length; i++) {
-            if (!this.isTyping) break;
-            this.searchInput.value += text[i];
-            await this.sleep(this.typingSpeed);
-        }
-        
-        this.isTyping = false;
-    }
+    showTypingIndicator() {
+        if (this.typingMessage) return;
 
-    // Type response with typing effect
-    async typeResponse(response, container, context = 'default') {
-        container.innerHTML = '';
-        this.isTyping = true;
-        
-        // For dynamic layouts, we'll render the full layout immediately
-        // but animate the content appearance
-        const renderedContent = this.responseRenderer.renderResponse(response, context);
-        container.innerHTML = renderedContent;
-        
-        // Add fade-in animation to the rendered content
-        const contentElements = container.querySelectorAll('*');
-        contentElements.forEach((element, index) => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(10px)';
-            
-            setTimeout(() => {
-                element.style.transition = 'opacity 0.3s ease, transform 0.3s ease'; // Faster animation
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, index * 30); // Faster stagger (was 60)
-        });
-        
-        this.isTyping = false;
-    }
+        const message = document.createElement('div');
+        message.className = 'chat-message is-assistant';
 
-    // Show loading state
-    showLoading() {
-        this.responseSection.style.display = 'block';
-        this.responseContainer.innerHTML = `
-            <div class="loading-container">
-                <div class="loading-dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-                <p class="loading-text">Thinking...</p>
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-avatar';
+        avatar.textContent = 'AI';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.innerHTML = `
+            <div class="typing-indicator" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+            <div class="chat-meta">Thinking</div>
         `;
-        
-        // Update search button
-        this.updateSearchButton('loading');
+
+        message.appendChild(avatar);
+        message.appendChild(bubble);
+
+        this.typingMessage = message;
+        this.chatStream.appendChild(message);
+        this.scrollToBottom();
     }
 
-    // Show response with dynamic layout
-    async showResponse(response, query = '', context = null) {
-        // Always clear the response container before rendering new content
-        this.responseSection.style.display = 'block';
-        this.responseContainer.innerHTML = '';
-        this.responseContainer.innerHTML = '<div class="response-content"></div>';
-        
-        // Update search button
-        this.updateSearchButton('responding');
-        
-        // Use provided context or detect from query
-        const detectedContext = context || this.responseRenderer.detectContext(query);
-        
-        await this.typeResponse(response, this.responseContainer.querySelector('.response-content'), detectedContext);
-        
-        // Reset search button
-        this.updateSearchButton('default');
-    }
-
-    // Show error
-    showError(message) {
-        this.responseSection.style.display = 'block';
-        this.responseContainer.innerHTML = `
-            <div class="error-container">
-                <div class="error-icon">⚠️</div>
-                <h3>Error</h3>
-                <p>${message}</p>
-            </div>
-        `;
-        
-        // Reset search button
-        this.updateSearchButton('default');
-    }
-
-    // Update search button state
-    updateSearchButton(state) {
-        const searchBtn = this.searchBtn;
-        const icon = searchBtn.querySelector('.material-icons');
-        
-        switch(state) {
-            case 'loading':
-                searchBtn.disabled = true;
-                searchBtn.style.background = 'var(--gradient-2)';
-                icon.textContent = 'hourglass_empty';
-                break;
-            case 'responding':
-                searchBtn.disabled = true;
-                searchBtn.style.background = 'var(--gradient-3)';
-                icon.textContent = 'auto_awesome';
-                break;
-            default:
-                searchBtn.disabled = false;
-                searchBtn.style.background = 'var(--gradient-1)';
-                icon.textContent = 'search';
-                break;
+    removeTypingIndicator() {
+        if (this.typingMessage) {
+            this.typingMessage.remove();
+            this.typingMessage = null;
         }
     }
 
-    // Update active button
-    updateActiveButton(clickedButton) {
-        this.actionButtons.forEach(btn => btn.classList.remove('active'));
-        clickedButton.classList.add('active');
+    clearInput() {
+        this.chatInput.value = '';
+        this.chatInput.style.height = 'auto';
     }
 
-    // Sleep utility
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    focusInput() {
+        this.chatInput.focus();
     }
 
-    // Stop typing
-    stopTyping() {
-        this.isTyping = false;
+    setInputValue(text) {
+        this.chatInput.value = text;
+        this.chatInput.dispatchEvent(new Event('input', { bubbles: true }));
     }
 
-    // Hide response section
-    hideResponse() {
-        this.responseSection.style.display = 'none';
+    scrollToBottom() {
+        this.chatStream.scrollTop = this.chatStream.scrollHeight;
     }
-} 
+}

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moksh Shah - Software Engineer</title>
-    <meta name="description" content="Moksh Shah - Software Engineer at Meta specializing in scalable platforms, AI/ML, and performance optimization">
-    
+    <title>Moksh Shah | AI-First Portfolio</title>
+    <meta name="description" content="Moksh Shah - Software Engineer specializing in scalable platforms, AI/ML, and performance optimization.">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L29BG2G32"></script>
     <script>
@@ -14,108 +14,108 @@
         gtag('js', new Date());
         gtag('config', 'G-5L29BG2G32');
     </script>
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="name">Moksh Shah</h1>
-            <h2>Software Engineer | Applied AI | GenAI Engineer</h2>
+    <div class="layout">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Moksh Shah</p>
+                <h1>Software Engineer | Applied AI | GenAI</h1>
+                <p class="subtitle">Building calm, scalable systems with AI at the core.</p>
+            </div>
+            <div class="contact-mini">
+                <a href="mailto:shahmoksh996@gmail.com">shahmoksh996@gmail.com</a>
+                <span>|</span>
+                <a href="https://linkedin.com/in/mshah-17" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Response Section -->
-            <section id="response-section" class="response-section" style="display: none;">
-                <div id="response-container" class="response-container">
-                    <!-- Response content will be inserted here -->
-                </div>
-            </section>
-
-            <!-- Action Buttons Section -->
-            <section class="action-buttons-section">
-                <div class="action-buttons">
-                    <button class="action-btn me-btn">
-                        <span class="material-icons">person</span>
-                        Me
-                    </button>
-                    <button class="action-btn projects-btn">
-                        <span class="material-icons">code</span>
-                        Projects
-                    </button>
-                    <button class="action-btn experience-btn">
-                        <span class="material-icons">work</span>
-                        Experience
-                    </button>
-                    <button class="action-btn skills-btn">
-                        <span class="material-icons">psychology</span>
-                        Skills
-                    </button>
-                    <button class="action-btn contact-btn">
-                        <span class="material-icons">contact_mail</span>
-                        Contact
-                    </button>
-                </div>
-            </section>
-
-            <!-- Search Section -->
-            <section class="search-section">
-                <div class="search-container">
-                    <form id="search-form" class="search-form">
-                        <div class="input-group">
-                            <input type="text" id="search-input" placeholder="Ask me about my experience, projects, or skills..." autocomplete="off">
-                        </div>
-                        <button type="submit" id="search-btn">
-                            <span class="material-icons">search</span>
-                        </button>
-                    </form>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Modal for detailed card information -->
-    <div id="card-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title"></h2>
-                <button class="modal-close" id="modal-close">
-                    <span class="material-icons">close</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Modal content will be inserted here -->
-            </div>
+        <div class="status-line" aria-hidden="true">
+            <span class="status-label">Signal</span>
+            <span class="status-text">currently shipping agentic AI, scalable platforms, and performance optimization</span>
+            <span class="status-cursor"></span>
         </div>
+
+        <main class="grid">
+            <section class="chat-card" aria-labelledby="chat-title">
+                <div class="chat-header">
+                    <div>
+                        <p class="chip">AI Portfolio Chat</p>
+                        <h2 id="chat-title">Ask me anything about my work</h2>
+                        <p class="chat-subtitle">Ask about experience, projects, skills, or impact.</p>
+                    </div>
+                    <div class="status-pill" id="chat-status">Online</div>
+                </div>
+
+                <div id="chat-stream" class="chat-stream" aria-live="polite"></div>
+
+                <div class="prompt-row">
+                    <button class="prompt" type="button" data-prompt="Give me a quick summary of your background.">Quick intro</button>
+                    <button class="prompt" type="button" data-prompt="What are your top projects and why do they matter?">Top projects</button>
+                    <button class="prompt" type="button" data-prompt="Summarize your AI/ML focus, tooling, and impact.">AI/ML focus</button>
+                    <button class="prompt" type="button" data-prompt="How can I contact you?">Contact</button>
+                </div>
+
+                <form id="chat-form" class="chat-form" autocomplete="off">
+                    <label class="sr-only" for="chat-input">Message</label>
+                    <textarea id="chat-input" rows="1" placeholder="Ask about experience, projects, skills, or impact..."></textarea>
+                    <button type="submit" id="send-btn" class="send-btn">Send</button>
+                </form>
+                <p class="chat-hint">Enter to send, Shift + Enter for a new line.</p>
+            </section>
+
+            <aside class="info-stack">
+                <div class="info-card">
+                    <p class="label">Impact</p>
+                    <div class="metric">
+                        <span>3000+</span>
+                        <small>hours saved yearly</small>
+                    </div>
+                    <div class="metric">
+                        <span>40%</span>
+                        <small>faster decisions</small>
+                    </div>
+                    <div class="metric">
+                        <span>8s to 200ms</span>
+                        <small>API latency</small>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <p class="label">Focus Areas</p>
+                    <ul>
+                        <li>AI-driven analytics and self-serve insights</li>
+                        <li>Scalable platforms and data reliability</li>
+                        <li>Performance optimization and automation</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <p class="label">Contact</p>
+                    <div class="contact-list">
+                        <a href="mailto:shahmoksh996@gmail.com">shahmoksh996@gmail.com</a>
+                        <a href="tel:+19165986993">(916) 598-6993</a>
+                        <a href="https://linkedin.com/in/mshah-17" target="_blank" rel="noopener noreferrer">LinkedIn: mshah-17</a>
+                        <a href="https://github.com/shmoksh" target="_blank" rel="noopener noreferrer">GitHub: shmoksh</a>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
     </div>
 
-    <!-- Social Links -->
-    <div class="social-links">
-        <a href="https://github.com/shmoksh" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-            <span class="material-icons" aria-hidden="true">code</span>
-        </a>
-        <a href="https://linkedin.com/in/mshah-17" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-            <span class="material-icons" aria-hidden="true">link</span>
-        </a>
-        <a href="mailto:shahmoksh996@gmail.com" class="social-link" aria-label="Email">
-            <span class="material-icons" aria-hidden="true">mail</span>
-        </a>
-    </div>
-
-    <!-- Fallback script for browsers without ES6 module support -->
     <script>
         if (!window.fetch) {
-            document.body.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">This application requires a modern browser with ES6 module support.</div>';
+            document.body.innerHTML = '<div style="text-align: center; padding: 2rem; color: #1b1f22;">This application requires a modern browser with ES6 module support.</div>';
         }
     </script>
-    
+
     <script type="module" src="script.js"></script>
     <script nomodule src="script-fallback.js"></script>
 </body>
-</html> 
+</html>

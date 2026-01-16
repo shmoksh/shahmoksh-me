@@ -1,50 +1,60 @@
 // Fallback script for browsers without ES6 module support
 console.log('ES6 modules not supported, using fallback');
 
-// Simple fallback functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const actionButtons = document.querySelectorAll('.action-btn');
-    const searchForm = document.getElementById('search-form');
-    const searchInput = document.getElementById('search-input');
-    const responseSection = document.getElementById('response-section');
-    const responseContainer = document.getElementById('response-container');
+    var chatStream = document.getElementById('chat-stream');
+    var chatForm = document.getElementById('chat-form');
+    var chatInput = document.getElementById('chat-input');
+    var chatStatus = document.getElementById('chat-status');
+    var promptButtons = document.querySelectorAll('[data-prompt]');
 
-    // Simple action button handling
-    actionButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remove active class from all buttons
-            actionButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            // Show a simple message
-            responseSection.style.display = 'block';
-            responseContainer.innerHTML = `
-                <div class="response-content">
-                    <h3>Feature Not Available</h3>
-                    <p>Please use a modern browser with ES6 module support for the full experience.</p>
-                </div>
-            `;
+    if (!chatStream || !chatForm || !chatInput) return;
+
+    if (chatStatus) {
+        chatStatus.textContent = 'Limited';
+    }
+
+    function addMessage(role, text) {
+        var message = document.createElement('div');
+        message.className = 'chat-message is-' + role;
+
+        var avatar = document.createElement('div');
+        avatar.className = 'chat-avatar';
+        avatar.textContent = role === 'assistant' ? 'AI' : 'YOU';
+
+        var bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.textContent = text;
+
+        if (role === 'user') {
+            message.appendChild(bubble);
+            message.appendChild(avatar);
+        } else {
+            message.appendChild(avatar);
+            message.appendChild(bubble);
+        }
+
+        chatStream.appendChild(message);
+        chatStream.scrollTop = chatStream.scrollHeight;
+    }
+
+    addMessage('assistant', 'This chat experience needs a modern browser with ES6 module support.');
+
+    chatForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var query = chatInput.value.trim();
+        if (!query) return;
+        addMessage('user', query);
+        addMessage('assistant', 'Please switch to a modern browser for AI responses.');
+        chatInput.value = '';
+    });
+
+    promptButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var prompt = button.getAttribute('data-prompt');
+            if (!prompt) return;
+            addMessage('user', prompt);
+            addMessage('assistant', 'Open this site in a modern browser to continue the chat.');
         });
     });
-
-    // Simple search handling
-    searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const query = searchInput.value.trim();
-        if (!query) return;
-        
-        responseSection.style.display = 'block';
-        responseContainer.innerHTML = `
-            <div class="response-content">
-                <h3>Search Feature</h3>
-                <p>You searched for: "${query}"</p>
-                <p>Please use a modern browser for AI-powered responses.</p>
-            </div>
-        `;
-    });
-}); 
+});
