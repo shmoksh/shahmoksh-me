@@ -4,7 +4,7 @@
   "description": "Netlify functions for AI portfolio website",
   "main": "api.js",
   "dependencies": {
-    "openai": "^4.0.0",
+    "@google/generative-ai": "^0.21.0",
     "dotenv": "^16.0.0"
   }
 } 

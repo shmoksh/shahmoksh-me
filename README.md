@@ -1,6 +1,6 @@
 # AI Portfolio Website - Modern & Responsive
 
-A modern, AI-powered personal portfolio website built with Express.js and OpenAI integration. Features a clean, professional design with full mobile responsiveness and enhanced functionality.
+A modern, AI-powered personal portfolio website built with Express.js and Google Gemini integration. Features a clean, professional design with full mobile responsiveness and a strict topic guardrail — the assistant only answers questions about Moksh.
 
 ## ✨ Major Updates & Improvements
 
@@ -16,10 +16,11 @@ A modern, AI-powered personal portfolio website built with Express.js and OpenAI
 - **No horizontal scrolling** - Content properly contained on all devices
 - **Touch-friendly interactions** - Optimized for mobile touch interfaces
 
-### 🤖 Enhanced OpenAI Integration
+### 🤖 Gemini Integration with Guardrail
+- **Google Gemini (`gemini-2.5-flash`)** - Fast, cost-effective inference via `@google/generative-ai`
+- **Server-side guardrail** - Only answers questions about Moksh; off-topic questions receive a fixed redirect message (robust against prompt injection)
 - **Comprehensive data source** - Pulls from detailed portfolio information
-- **Better error handling** - Graceful handling of API issues and quota limits
-- **Improved prompts** - More detailed system prompt for accurate responses
+- **Better error handling** - Graceful handling of API issues and key misconfiguration
 - **Loading states** - Professional loading indicators during AI processing
 
 ### ♿ Accessibility Improvements
@@ -42,7 +43,7 @@ A modern, AI-powered personal portfolio website built with Express.js and OpenAI
 
 - **Backend**: Node.js, Express.js
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **AI Integration**: OpenAI GPT-3.5-turbo
+- **AI Integration**: Google Gemini (`gemini-2.5-flash`)
 - **Styling**: Custom CSS with modern design system
 - **Fonts**: JetBrains Mono (monospace)
 - **Icons**: Material Icons
@@ -63,7 +64,7 @@ A modern, AI-powered personal portfolio website built with Express.js and OpenAI
 3. **Set up environment variables**
    ```bash
    cp .env.example .env
-   # Edit .env and add your OpenAI API key
+   # Edit .env and add your Google Gemini API key from https://aistudio.google.com/app/apikey
    ```
 
 4. **Start the development server**
@@ -79,15 +80,17 @@ A modern, AI-powered personal portfolio website built with Express.js and OpenAI
 Create a `.env` file in the root directory:
 
 ```env
-OPENAI_API_KEY=your_openai_api_key_here
+GEMINI_API_KEY=your_google_gemini_api_key_here
 PORT=3001
 ```
+
+The `.env` file is gitignored. Never commit secrets — only `.env.example` (with placeholder) is tracked. For production, set `GEMINI_API_KEY` in the Netlify dashboard (**Site settings → Environment variables**).
 
 ## 📁 Project Structure
 
 ```
 shahmoksh-me/
-├── app.js                 # Express server with OpenAI integration
+├── app.js                 # Express server with Gemini integration + guardrail
 ├── about.txt             # Comprehensive portfolio data
 ├── package.json          # Dependencies and scripts
 ├── .env                  # Environment variables (create this)
@@ -130,7 +133,7 @@ shahmoksh-me/
 ## 🌐 API Endpoints
 
 - `GET /` - Serves the main portfolio page
-- `POST /ask` - AI chat endpoint (requires OpenAI API key)
+- `POST /ask` - AI chat endpoint (requires `GEMINI_API_KEY`)
 - `GET /api/health` - Health check endpoint
 
 ## 🚀 Deployment
