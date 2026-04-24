@@ -6,12 +6,15 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Order matters: API redirect must come BEFORE the SPA catch-all,
+# otherwise /api/ask gets rewritten to /index.html and POST returns 404.
+[[redirects]]
+  from = "/api/ask"
+  to = "/.netlify/functions/api"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[redirects]]
-  from = "/api/ask"
-  to = "/.netlify/functions/api"
-  status = 200 
