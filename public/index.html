@@ -1,121 +1,675 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moksh Shah | AI-First Portfolio</title>
-    <meta name="description" content="Moksh Shah - Software Engineer specializing in scalable platforms, AI/ML, and performance optimization.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moksh Shah | Software Engineer — Applied AI, GenAI</title>
+  <meta name="description" content="Moksh Shah — Software Engineer at Meta building agentic AI, scalable platforms, and 0→1 products." />
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L29BG2G32"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-5L29BG2G32');
-    </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L29BG2G32"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5L29BG2G32');
+  </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f6fa;
+      --bg2: #e4e9f4;
+      --ink: #0a0f1e;
+      --ink2: #3a4a6b;
+      --accent: #2457e8;
+      --rule: #c4cedf;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --max: 740px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 48px;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--rule); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    section { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      padding-top: 80px;
+      max-width: 960px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+    }
+    .hero-left { display: flex; flex-direction: column; }
+    .hero-right { display: flex; flex-direction: column; gap: 12px; }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-tagline {
+      font-size: 16px; color: var(--ink2); font-weight: 400;
+      max-width: 480px; line-height: 1.6; margin-bottom: 24px;
+    }
+    .hero-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+    .hero-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+      text-decoration: none; color: var(--ink2);
+      transition: color 0.2s;
+    }
+    .hero-links a:hover { color: var(--accent); }
+    .hero-links .dot { color: var(--rule); }
+    .scroll-hint {
+      margin-top: 32px; display: flex; align-items: center; gap: 12px;
+      color: var(--ink2); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .scroll-line { width: 40px; height: 1px; background: var(--rule); }
+
+    /* DIVIDER */
+    .divider { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .divider hr { border: none; border-top: 1px solid var(--rule); margin: 40px 0; }
+
+    /* SECTION HEADER */
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule); max-width: 80px;
+    }
+
+    /* ABOUT */
+    .about-text {
+      font-family: var(--serif); font-size: 22px; line-height: 1.5;
+      letter-spacing: -0.01em; color: var(--ink);
+      margin-bottom: 24px; max-width: 600px;
+    }
+    .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; border: 1px solid var(--rule); border-radius: 2px;
+      overflow: hidden;
+    }
+    .stat { padding: 16px 20px; background: var(--bg); border-right: 1px solid var(--rule); }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--serif); font-size: 24px;
+      color: var(--ink); letter-spacing: -0.02em; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 12px; color: var(--ink2); line-height: 1.4; }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid; grid-template-columns: 110px 1fr;
+      gap: 20px; padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .exp-item:first-child { border-top: 1px solid var(--rule); }
+    .exp-date { font-size: 12px; color: var(--ink2); padding-top: 3px; line-height: 1.5; }
+    .exp-role { font-family: var(--serif); font-size: 20px; line-height: 1.2; margin-bottom: 4px; }
+    .exp-company { font-size: 13px; color: var(--accent); font-weight: 500; margin-bottom: 10px; }
+    .exp-desc { font-size: 14px; color: var(--ink2); line-height: 1.6; margin-bottom: 8px; }
+    .exp-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .exp-tag {
+      font-size: 11px; padding: 3px 9px; border-radius: 100px;
+      border: 1px solid var(--rule); color: var(--ink2); letter-spacing: 0.06em;
+    }
+
+    /* PROJECTS */
+    .proj-grid { display: flex; flex-direction: column; gap: 0; }
+    .proj-item {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+      gap: 20px;
+    }
+    .proj-item:first-child { border-top: 1px solid var(--rule); }
+    .proj-num { font-size: 11px; color: var(--ink2); font-weight: 500; margin-bottom: 6px; }
+    .proj-title { font-family: var(--serif); font-size: 19px; margin-bottom: 6px; line-height: 1.2; }
+    .proj-desc { font-size: 14px; color: var(--ink2); line-height: 1.55; max-width: 480px; }
+    .proj-tag {
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink2); border: 1px solid var(--rule);
+      padding: 4px 10px; border-radius: 100px; white-space: nowrap; align-self: center;
+    }
+
+    /* SKILLS */
+    .skills-list { display: flex; flex-direction: column; gap: 0; }
+    .skills-row {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 20px; padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+    .skills-row:first-child { border-top: 1px solid var(--rule); }
+    .skills-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink2);
+    }
+    .skills-items { font-size: 14px; color: var(--ink); line-height: 1.6; }
+
+    /* FOCUS AREAS */
+    .focus-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .focus-item {
+      padding: 12px 0; border-bottom: 1px solid var(--rule);
+      font-size: 15px; color: var(--ink);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .focus-item:first-child { border-top: 1px solid var(--rule); }
+    .focus-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* CONTACT */
+    .contact-heading {
+      font-family: var(--serif); font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 36px;
+    }
+    .contact-heading em { font-style: italic; color: var(--accent); }
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .contact-link {
+      display: flex; align-items: center; gap: 16px;
+      text-decoration: none; color: var(--ink);
+      font-size: 15px; transition: color 0.2s;
+      padding: 12px 0; border-bottom: 1px solid var(--rule);
+    }
+    .contact-link:first-child { border-top: 1px solid var(--rule); }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); width: 80px; flex-shrink: 0; }
+    .contact-link-value { font-family: var(--serif); font-size: 19px; }
+
+    /* FOOTER */
+    .footer {
+      max-width: var(--max); margin: 0 auto; padding: 48px 24px 80px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--ink2);
+    }
+
+    /* CHAT */
+    .chat-embed {
+      border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+      background: var(--bg);
+    }
+    .chat-messages {
+      height: 340px; overflow-y: auto; padding: 24px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .chat-bubble { max-width: 85%; font-size: 14px; line-height: 1.6; }
+    .chat-bubble.assistant { align-self: flex-start; color: var(--ink); }
+    .chat-bubble.assistant .bubble-inner {
+      background: var(--bg2); padding: 12px 16px; border-radius: 2px 14px 14px 14px;
+      white-space: pre-wrap;
+    }
+    .chat-bubble.user { align-self: flex-end; }
+    .chat-bubble.user .bubble-inner {
+      background: var(--accent); color: #fff;
+      padding: 12px 16px; border-radius: 14px 2px 14px 14px;
+      white-space: pre-wrap;
+    }
+    .chat-chips { padding: 0 20px 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chat-chip {
+      font-size: 12px; padding: 6px 14px; border-radius: 100px;
+      border: 1px solid var(--rule); background: var(--bg);
+      color: var(--ink2); cursor: pointer; transition: all 0.2s;
+      font-family: var(--sans); white-space: nowrap;
+    }
+    .chat-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .chat-input-row {
+      padding: 14px 20px 20px; border-top: 1px solid var(--rule);
+      display: flex; gap: 10px; align-items: flex-end;
+    }
+    .chat-textarea {
+      flex: 1; font-family: var(--sans); font-size: 14px; font-weight: 300;
+      background: var(--bg2); border: 1px solid var(--rule); border-radius: 8px;
+      padding: 11px 14px; resize: none; color: var(--ink); line-height: 1.5;
+      outline: none; transition: border-color 0.2s; min-height: 42px; max-height: 120px;
+    }
+    .chat-textarea:focus { border-color: var(--accent); }
+    .chat-send {
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      width: 42px; height: 42px; cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: opacity 0.2s;
+    }
+    .chat-send:hover { opacity: 0.85; }
+    .chat-send:disabled { opacity: 0.35; cursor: not-allowed; }
+    .typing-dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--ink2); animation: typing 1.2s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%, 80%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 720px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid var(--rule); }
+      .stat:last-child { border-bottom: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 100px; padding-bottom: 40px; }
+      .exp-item { grid-template-columns: 1fr; gap: 4px; }
+      .skills-row { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="layout">
-        <header class="topbar">
-            <div>
-                <p class="eyebrow">Moksh Shah</p>
-                <h1>Software Engineer | Applied AI | GenAI</h1>
-                <p class="subtitle">Building calm, scalable systems with AI at the core.</p>
-            </div>
-            <div class="contact-mini">
-                <a href="mailto:shahmoksh996@gmail.com">shahmoksh996@gmail.com</a>
-                <span>|</span>
-                <a href="https://linkedin.com/in/mshah-17" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </div>
-        </header>
 
-        <div class="status-line" aria-hidden="true">
-            <span class="status-label">Signal</span>
-            <span class="status-text">building agentic AI platforms, scalable systems, and performance optimization</span>
-            <span class="status-cursor"></span>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="env,react">
+const { useState, useEffect, useRef } = React;
+
+// ── DATA ────────────────────────────────────────────────────────────────
+const TAGLINE = "Software Engineer at Meta — drawn to 0→1, agentic AI, and shipping fast.";
+
+const EXPERIENCE = [
+  {
+    date: "Jun 2022 — Now",
+    role: "Software Engineer",
+    company: "Meta",
+    desc: "Built a 0→1 scalable platform saving 3000+ hours/year. Shipped agentic AI for self-serve analytics (40% faster decisions). Cut API latency 8s → 200ms org-wide. Co-built an Airflow-like ETL framework powering 220+ pipelines at 99.9% uptime. Added ML-based SEV detection.",
+    tags: ["GenAI", "Agentic AI", "Python", "ETL", "Performance"]
+  },
+  {
+    date: "Feb 2021 — Dec 2021",
+    role: "Software Engineer Intern",
+    company: "Intel Corporation",
+    desc: "Built a multi-processing test-execution app (~40% faster). Restructured failure-logging into cluster groups. Partnered with XFN teams on an automation framework. Automated the CI/CD pipeline for regression testing (+35% productivity).",
+    tags: ["Python", "CI/CD", "Automation", "Testing"]
+  },
+  {
+    date: "Jul 2018 — Apr 2019",
+    role: "Software Engineer",
+    company: "Turabit Solution Pvt. Ltd.",
+    desc: "Built a conversational AI chatbot automating IT services (80% task reduction). Secure REST APIs for cross-platform integration (+40% efficiency). Integrated Stripe pay-as-you-go in a chatbot-builder web app. Redesigned DB architecture (backup, storage, security).",
+    tags: ["AI Chatbot", "REST APIs", "Stripe", "DB Design"]
+  },
+  {
+    date: "Jan 2018 — Jul 2018",
+    role: "Software Engineer Intern",
+    company: "ConceptServe Technologies",
+    desc: "Built a scalable MVC-based social media app with CRUD for posts, comments, and groups. Integrated OTP-based 2FA with email verification for stronger account security.",
+    tags: ["MVC", "2FA", "Full-stack"]
+  }
+];
+
+const PROJECTS = [
+  {
+    num: "01",
+    title: "Retrieval-Augmented Generation (RAG) System",
+    desc: "End-to-end RAG pipeline with chunking, embeddings, and hybrid retrieval (FAISS + ElasticSearch) — 92% precision, 88% recall on 50K+ docs. Cross-encoder reranker + BLEU eval lifted accuracy to 95% and cut hallucinations ~30%. Flask API with <300ms retrieval latency.",
+    tag: "GenAI / RAG"
+  },
+  {
+    num: "02",
+    title: "Stock Market WebApp",
+    desc: "RESTful APIs serving 8,000+ companies' stock data with DynamoDB storage and real-time candlestick charts.",
+    tag: "APIs / Data"
+  },
+  {
+    num: "03",
+    title: "Network Intrusion Detection",
+    desc: "Binary classification (LR, KNN, SVM, NN) to distinguish good vs. bad connections. One-hot encoding to balance train/test; correlation pruning (threshold 0.9) to avoid overfitting.",
+    tag: "ML / Security"
+  },
+  {
+    num: "04",
+    title: "House Price Estimation",
+    desc: "End-to-end predictive model for housing prices — 92% R² via feature scaling, one-hot encoding, and cross-validation.",
+    tag: "ML / Regression"
+  }
+];
+
+const SKILLS = [
+  { label: "Languages", items: "Python · Java · Go · TypeScript · Rust · Kotlin · Node.js" },
+  { label: "AI / ML",   items: "GenAI · Agentic Systems · RAG · Embeddings · Vector Retrieval · Machine Learning" },
+  { label: "Backend",   items: "Django · Flask · Next.js · React · GraphQL · REST · gRPC · Tailwind" },
+  { label: "Data",      items: "PostgreSQL · MongoDB · Redis · EntQL · FAISS · ElasticSearch" },
+  { label: "Cloud",     items: "AWS (EC2, S3, Lambda) · Azure · Docker · Kubernetes · Jenkins · Git" },
+];
+
+const FOCUS = [
+  "AI-driven analytics and self-serve insights",
+  "0→1 platforms and developer velocity",
+  "Performance optimization and automation at scale"
+];
+
+// ── EMBEDDED CHAT ────────────────────────────────────────────────────────
+function EmbeddedChat() {
+  const [messages, setMessages] = useState([
+    { role: 'assistant', content: "Hi — I'm an AI trained on Moksh's work. Ask me anything about his experience, projects, or approach." }
+  ]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const messagesRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages, loading]);
+
+  const send = async (text) => {
+    const msg = (text || input).trim();
+    if (!msg || loading) return;
+    setInput('');
+    setMessages(m => [...m, { role: 'user', content: msg }]);
+    setLoading(true);
+    try {
+      const res = await fetch('/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: msg })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+      setMessages(m => [...m, { role: 'assistant', content: data.response }]);
+    } catch (e) {
+      setMessages(m => [...m, { role: 'assistant', content: "Something went wrong reaching the AI service. Try again in a moment, or reach out at shahmoksh996@gmail.com." }]);
+    }
+    setLoading(false);
+  };
+
+  const handleKey = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  };
+
+  const chips = ["Top projects", "AI/ML focus", "Work at Meta", "How to reach out"];
+
+  return (
+    <div className="chat-embed">
+      <div className="chat-messages" ref={messagesRef}>
+        {messages.map((m, i) => (
+          <div key={i} className={`chat-bubble ${m.role}`}>
+            <div className="bubble-inner">{m.content}</div>
+          </div>
+        ))}
+        {loading && (
+          <div className="chat-bubble assistant">
+            <div className="bubble-inner" style={{display:'flex',gap:5,alignItems:'center',minHeight:20}}>
+              <span className="typing-dot"></span>
+              <span className="typing-dot"></span>
+              <span className="typing-dot"></span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {messages.length < 3 && (
+        <div className="chat-chips">
+          {chips.map(c => (
+            <button key={c} className="chat-chip" onClick={() => send(c)}>{c}</button>
+          ))}
         </div>
+      )}
 
-        <main class="grid">
-            <section class="chat-card" aria-labelledby="chat-title">
-                <div class="chat-header">
-                    <div>
-                        <p class="chip">AI Portfolio Chat</p>
-                        <h2 id="chat-title">Ask me anything about my work</h2>
-                        <p class="chat-subtitle">Ask about experience, projects, skills, or impact.</p>
-                    </div>
-                    <div class="status-pill" id="chat-status">Online</div>
-                </div>
-
-                <div id="chat-stream" class="chat-stream" aria-live="polite"></div>
-
-                <div class="prompt-row">
-                    <button class="prompt" type="button" data-prompt="Give me a quick summary of your background.">Quick intro</button>
-                    <button class="prompt" type="button" data-prompt="What are your top projects and why do they matter?">Top projects</button>
-                    <button class="prompt" type="button" data-prompt="Summarize your AI/ML focus, tooling, and impact.">AI/ML focus</button>
-                    <button class="prompt" type="button" data-prompt="How can I contact you?">Contact</button>
-                </div>
-
-                <form id="chat-form" class="chat-form" autocomplete="off">
-                    <label class="sr-only" for="chat-input">Message</label>
-                    <textarea id="chat-input" rows="1" placeholder="Ask about experience, projects, skills, or impact..."></textarea>
-                    <button type="submit" id="send-btn" class="send-btn">Send</button>
-                </form>
-                <p class="chat-hint">Enter to send, Shift + Enter for a new line.</p>
-            </section>
-
-            <aside class="info-stack">
-                <div class="info-card">
-                    <p class="label">Impact</p>
-                    <div class="metric">
-                        <span>3000+</span>
-                        <small>hours saved yearly</small>
-                    </div>
-                    <div class="metric">
-                        <span>40%</span>
-                        <small>faster decisions</small>
-                    </div>
-                    <div class="metric">
-                        <span>8s to 200ms</span>
-                        <small>API latency</small>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <p class="label">Focus Areas</p>
-                    <ul>
-                        <li>AI-driven analytics and self-serve insights</li>
-                        <li>Scalable platforms and data reliability</li>
-                        <li>Performance optimization and automation</li>
-                    </ul>
-                </div>
-
-                <div class="info-card">
-                    <p class="label">Contact</p>
-                    <div class="contact-list">
-                        <a href="mailto:shahmoksh996@gmail.com">shahmoksh996@gmail.com</a>
-                        <a href="tel:+19165986993">(916) 598-6993</a>
-                        <a href="https://linkedin.com/in/mshah-17" target="_blank" rel="noopener noreferrer">LinkedIn: mshah-17</a>
-                        <a href="https://github.com/shmoksh" target="_blank" rel="noopener noreferrer">GitHub: shmoksh</a>
-                    </div>
-                </div>
-            </aside>
-        </main>
-
+      <div className="chat-input-row">
+        <textarea
+          className="chat-textarea"
+          placeholder="Ask about experience, projects, skills…"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={handleKey}
+          rows={1}
+        />
+        <button className="chat-send" onClick={() => send()} disabled={!input.trim() || loading}>↑</button>
+      </div>
     </div>
+  );
+}
 
-    <script>
-        if (!window.fetch) {
-            document.body.innerHTML = '<div style="text-align: center; padding: 2rem; color: #1b1f22;">This application requires a modern browser with ES6 module support.</div>';
-        }
-    </script>
+// ── EXPERIENCE ITEM ───────────────────────────────────────────────────────
+function ExpItem({ item }) {
+  return (
+    <div className="exp-item">
+      <div className="exp-date">{item.date}</div>
+      <div>
+        <div className="exp-role">{item.role}</div>
+        <div className="exp-company">{item.company}</div>
+        <div className="exp-desc">{item.desc}</div>
+        <div className="exp-tags">
+          {item.tags.map(t => <span key={t} className="exp-tag">{t}</span>)}
+        </div>
+      </div>
+    </div>
+  );
+}
 
-    <script type="module" src="script.js"></script>
-    <script nomodule src="script-fallback.js"></script>
+// ── MAIN APP ─────────────────────────────────────────────────────────────
+function App() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const els = document.querySelectorAll('.fade-in');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    els.forEach(el => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <>
+      <nav className={scrolled ? 'scrolled' : ''}>
+        <a href="#" className="nav-logo">MS</a>
+        <ul className="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Work</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      {/* HERO */}
+      <div className="hero">
+        <div className="hero-left">
+          <div className="hero-eyebrow">Software Engineer · Applied AI · GenAI</div>
+          <h1 className="hero-name">Moksh<br/><em>Shah</em></h1>
+          <p className="hero-tagline">{TAGLINE}</p>
+          <div className="hero-links">
+            <a href="mailto:shahmoksh996@gmail.com">Email</a>
+            <span className="dot">·</span>
+            <a href="https://linkedin.com/in/mshah-17" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <span className="dot">·</span>
+            <a href="https://github.com/shmoksh" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <div className="scroll-hint">
+            <div className="scroll-line"></div>
+            Scroll
+          </div>
+        </div>
+        <div className="hero-right fade-in">
+          <div style={{fontSize:11,fontWeight:500,letterSpacing:'0.14em',textTransform:'uppercase',color:'var(--accent)',marginBottom:8}}>Ask me anything</div>
+          <EmbeddedChat />
+        </div>
+      </div>
+
+      {/* ABOUT */}
+      <section id="about" style={{paddingTop: 40, paddingBottom: 40}}>
+        <div className="section-label fade-in">About</div>
+        <p className="about-text fade-in">
+          I build systems that make AI useful — not just impressive. Focused on reliability, speed, and outcomes teams actually feel.
+        </p>
+        <div className="stats fade-in">
+          <div className="stat">
+            <div className="stat-num">3,000+</div>
+            <div className="stat-label">hours saved<br/>yearly</div>
+          </div>
+          <div className="stat">
+            <div className="stat-num">40%</div>
+            <div className="stat-label">faster<br/>decisions</div>
+          </div>
+          <div className="stat">
+            <div className="stat-num">8s→200ms</div>
+            <div className="stat-label">API latency<br/>reduction</div>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider"><hr/></div>
+
+      {/* FOCUS */}
+      <section style={{paddingBottom: 40}}>
+        <div className="section-label fade-in">Focus</div>
+        <ul className="focus-list fade-in">
+          {FOCUS.map(f => (
+            <li key={f} className="focus-item"><span className="focus-dot"></span>{f}</li>
+          ))}
+        </ul>
+      </section>
+
+      <div className="divider"><hr/></div>
+
+      {/* EXPERIENCE */}
+      <section id="experience" style={{paddingBottom: 40}}>
+        <div className="section-label fade-in">Experience</div>
+        <div className="exp-list fade-in">
+          {EXPERIENCE.map((e, i) => <ExpItem key={i} item={e} />)}
+        </div>
+      </section>
+
+      <div className="divider"><hr/></div>
+
+      {/* SKILLS */}
+      <section style={{paddingBottom: 40}}>
+        <div className="section-label fade-in">Skills</div>
+        <div className="skills-list fade-in">
+          {SKILLS.map(s => (
+            <div key={s.label} className="skills-row">
+              <span className="skills-label">{s.label}</span>
+              <span className="skills-items">{s.items}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="divider"><hr/></div>
+
+      {/* PROJECTS */}
+      <section id="projects" style={{paddingBottom: 40}}>
+        <div className="section-label fade-in">Projects</div>
+        <div className="proj-grid fade-in">
+          {PROJECTS.map((p) => (
+            <div key={p.num} className="proj-item">
+              <div>
+                <div className="proj-num">{p.num}</div>
+                <div className="proj-title">{p.title}</div>
+                <div className="proj-desc">{p.desc}</div>
+              </div>
+              <span className="proj-tag">{p.tag}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="divider"><hr/></div>
+
+      {/* CONTACT */}
+      <section id="contact" style={{paddingBottom: 80}}>
+        <div className="section-label fade-in">Contact</div>
+        <h2 className="contact-heading fade-in">Let's work<br/><em>together</em></h2>
+        <div className="contact-links fade-in">
+          <a href="mailto:shahmoksh996@gmail.com" className="contact-link">
+            <span className="contact-link-label">Email</span>
+            <span className="contact-link-value">shahmoksh996@gmail.com</span>
+          </a>
+          <a href="tel:+19165986993" className="contact-link">
+            <span className="contact-link-label">Phone</span>
+            <span className="contact-link-value">(916) 598-6993</span>
+          </a>
+          <a href="https://linkedin.com/in/mshah-17" target="_blank" rel="noopener noreferrer" className="contact-link">
+            <span className="contact-link-label">LinkedIn</span>
+            <span className="contact-link-value">mshah-17</span>
+          </a>
+          <a href="https://github.com/shmoksh" target="_blank" rel="noopener noreferrer" className="contact-link">
+            <span className="contact-link-label">GitHub</span>
+            <span className="contact-link-value">shmoksh</span>
+          </a>
+        </div>
+      </section>
+
+      <div className="footer">
+        <span>© 2026 Moksh Shah</span>
+        <span>Built with intent.</span>
+      </div>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
 </body>
 </html>
