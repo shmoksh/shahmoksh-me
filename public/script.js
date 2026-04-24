@@ -32,7 +32,7 @@ class PortfolioChat {
             button.addEventListener('click', () => {
                 const prompt = button.getAttribute('data-prompt');
                 if (prompt) {
-                    this.submitQuery(prompt, { useApi: false });
+                    this.submitQuery(prompt);
                 }
             });
         });
@@ -48,10 +48,10 @@ class PortfolioChat {
     handleSubmit() {
         const query = this.ui.chatInput.value.trim();
         if (!query) return;
-        this.submitQuery(query, { useApi: true });
+        this.submitQuery(query);
     }
 
-    async submitQuery(query, { useApi }) {
+    async submitQuery(query) {
         if (this.isProcessing) return;
         this.isProcessing = true;
 
@@ -62,13 +62,15 @@ class PortfolioChat {
         this.ui.showTypingIndicator();
 
         try {
-            if (!useApi) {
-                await this.sleep(600);
-            }
-            const response = await this.getResponse(query, { useApi });
+            const result = await this.apiService.askQuestion(query);
             this.ui.removeTypingIndicator();
-            this.ui.addMessage('assistant', response);
-            this.ui.setStatus('Online');
+            if (result.success) {
+                this.ui.addMessage('assistant', result.data);
+                this.ui.setStatus('Online');
+            } else {
+                this.ui.addMessage('assistant', `I could not reach the AI service. ${result.error}`);
+                this.ui.setStatus('Offline', true);
+            }
         } catch (error) {
             this.ui.removeTypingIndicator();
             this.ui.addMessage('assistant', 'Sorry, something went wrong. Please try again.');
@@ -77,31 +79,6 @@ class PortfolioChat {
             this.isProcessing = false;
             this.ui.setSendingState(false);
         }
-    }
-
-    async getResponse(query, { useApi }) {
-        const predefinedAction = this.apiService.shouldUsePredefinedResponse(query);
-        if (predefinedAction) {
-            return this.apiService.getPredefinedResponse(predefinedAction);
-        }
-
-        if (!useApi) {
-            return this.apiService.getFallbackReply();
-        }
-
-        if (this.apiService.isMokshRelated(query)) {
-            const result = await this.apiService.askQuestion(query);
-            if (result.success) {
-                return result.data;
-            }
-            return `I could not reach the AI service. ${result.error}`;
-        }
-
-        return this.apiService.getFallbackReply();
-    }
-
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
 
